@@ -1,10 +1,11 @@
 from studyapp import studyapp_obj
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm
+from studyapp.forms import LoginForm, SignupForm, UploadForm
 from studyapp.models import User,Post
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
-
+import markdown.extensions.fenced_code
+from werkzeug.utils import secure_filename
 
 @studyapp_obj.route("/loggedin")
 @login_required
@@ -44,3 +45,25 @@ def home():
     title = "Homepage"
     return render_template('home.html',title=title)
 
+@studyapp_obj.route("/md_to_flashcard", methods=['GET', 'POST'])
+def markdown_to_flashcard():
+    form = UploadForm()
+    if form.validate_on_submit():
+        filename = secure_filename(form.file.data.filename)
+        form.file.data.save(filename)
+        open_file = open(filename, "r")
+        md_template_string = markdown.markdown(
+        open_file.read(), extensions=["fenced_code", "codehilite"]
+        )
+        return md_template_string
+    return render_template('md_to_flashcard.html', form=form)
+
+
+# @studyapp_obj.route('/flashcard_to_pdf')
+# def flashcard_to_pdf():
+    
+# @studyapp_obj.route('/md_to_pdf')
+# def md_to_pdf():
+
+# @studyapp_obj.route('/render_md')
+# def render_md():
