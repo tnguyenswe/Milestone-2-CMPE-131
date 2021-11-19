@@ -32,3 +32,10 @@ class Post(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Flashcard(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(256))
+    
+    def __repr__(self):
+        return f'{self.body}'

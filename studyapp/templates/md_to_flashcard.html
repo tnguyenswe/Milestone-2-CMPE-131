@@ -5,4 +5,10 @@
     {{ form.file }}
     <input type="submit">
 </form>
+{% if md_file %}
+{{ md_file | safe }}
+{% if success %}
+<p>Your file has been added!</p>
+{% endif %}
+{% endif %}
 {% endblock %}
