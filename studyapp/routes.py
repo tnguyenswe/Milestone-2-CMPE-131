@@ -45,17 +45,22 @@ def home():
     title = "Homepage"
     return render_template('home.html',title=title)
 
+#convert markdown to flash card
 @studyapp_obj.route("/md_to_flashcard", methods=['GET', 'POST'])
 def markdown_to_flashcard():
     form = UploadForm()
     if form.validate_on_submit():
+        # get file name from form
         filename = secure_filename(form.file.data.filename)
-        form.file.data.save(filename)
-        open_file = open(filename, "r")
+        # save the md file in a flashcards directory
+        form.file.data.save("studyapp/flashcards/" + filename)
+        # open the md file
+        open_file = open("studyapp/flashcards/" + filename, "r")
+        # convert md to html so render template can render it
         md_template_string = markdown.markdown(
         open_file.read(), extensions=["fenced_code", "codehilite"]
         )
-        return md_template_string
+        return render_template('md_to_flashcard.html', form=form, success=True, md_file = md_template_string)
     return render_template('md_to_flashcard.html', form=form)
 
 
@@ -65,5 +70,20 @@ def markdown_to_flashcard():
 # @studyapp_obj.route('/md_to_pdf')
 # def md_to_pdf():
 
-# @studyapp_obj.route('/render_md')
-# def render_md():
+#render markdown
+@studyapp_obj.route('/render_md', methods=['GET', 'POST'])
+def render_md():
+    form = UploadForm()
+    if form.validate_on_submit():
+        # get file name from form
+        filename = secure_filename(form.file.data.filename)
+        # save the md file in a render_md directory
+        form.file.data.save("studyapp/render_md/" + filename)
+        # open the md file
+        open_file = open("studyapp/render_md/" + filename, "r")
+        # convert md to html
+        md_template_string = markdown.markdown(
+        open_file.read(), extensions=["fenced_code", "codehilite"]
+        )
+        return md_template_string
+    return render_template('md_to_flashcard.html', form=form)
