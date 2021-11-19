@@ -44,3 +44,15 @@ def home():
     title = "Homepage"
     return render_template('home.html',title=title)
 
+@studyapp_obj.route("/md_to_flashcard")
+def markdown_to_flashcard():
+    
+    
+@studyapp_obj.route('/flashcard_to_pdf')
+def flashcard_to_pdf():
+    
+@studyapp_obj.route('/md_to_pdf')
+def md_to_pdf():
+
+@studyapp_obj.route('/render_md')
+def render_md():
