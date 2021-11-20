@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;"> Please enter a Markdown file to be converted to a flashcard (HTML)</h1>
+<h1 style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;"> Please enter a Markdown file to be rendered</h1>
 <form method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     {{ form.file }}
