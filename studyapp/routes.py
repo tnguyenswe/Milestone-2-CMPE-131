@@ -67,8 +67,20 @@ def markdown_to_flashcard():
     return render_template('md_to_flashcard.html', form=form)
 
 # convert flashcard (html) to pdf
-# @studyapp_obj.route('/flashcard_to_pdf')
-# def flashcard_to_pdf():
+@studyapp_obj.route('/flashcard_to_pdf', methods=['GET', 'POST'])
+def flashcard_to_pdf():
+    import pdfkit
+    form = UploadForm()
+    if form.validate_on_submit():
+        filename = secure_filename(form.file.data.filename)
+        # save the md file in a flashcards directory
+        form.file.data.save("studyapp/flashcards/" + filename)
+        input_filename = 'studyapp/flashcards/' + filename
+        output_filename = input_filename.split(".html")
+        output_filename = output_filename[0] + '.pdf'
+        pdfkit.from_file(input_filename, output_filename)
+        return render_template('flashcard_to_pdf.html', form=form, pdf=output_filename)        
+    return render_template('flashcard_to_pdf.html', form=form)
     
 # convert markdown to pdf
 @studyapp_obj.route('/md_to_pdf', methods=['GET', 'POST'])
