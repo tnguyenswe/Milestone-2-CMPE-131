@@ -95,6 +95,7 @@ def md_to_pdf():
 #render markdown
 @studyapp_obj.route('/render_md', methods=['GET', 'POST'])
 def render_md():
+    import markdown.extensions.fenced_code
     form = UploadForm()
     if form.validate_on_submit():
         # get file name from form
