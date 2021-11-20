@@ -121,4 +121,4 @@ def render_md():
         open_file.read(), extensions=["fenced_code", "codehilite"]
         )
         return md_template_string
-    return render_template('md_to_flashcard.html', form=form)
+    return render_template('render_md.html', form=form)
