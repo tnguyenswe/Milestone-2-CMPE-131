@@ -4,12 +4,16 @@
 		{% if title  %}
 			<title> {{title}}!</title>
 			{% endif %}
+			<style>
+				@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+			</style>
+			<link rel="stylesheet" href="css/base.css">
 	</head>
 	<body>
-		<div>
-			<a href ="/login">Login</a>
-			<a href ="/">Home</a>
-			<a href ='/signup'>Sign Up</a>
+		<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; height: 100%; justify-items: center; border-radius: 6px; border: black; border-style: solid;">
+			<a onmouseover="this.style.color='gray';" onmouseout="this.style.color='black';" style="  font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href ="/login">Login</a>
+			<a onmouseover="this.style.color='gray';" onmouseout="this.style.color='black';" style="  font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href ="/">Home</a>
+			<a onmouseover="this.style.color='gray';" onmouseout="this.style.color='black';" style="  font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href ='/signup'>Sign Up</a>
 		</div>	
 
 		<div>
