@@ -7,6 +7,8 @@ Temporary README- we need to add a MKDOCS file website.
 pip3 install flask-login
 pip3 install flask_sqlalchemy
 pip3 install flask_wtf
+pip3 install pdfkit
+pip3 install wkhtmltopdf
 ```
 
 You also need to install the wkhtmltopdf binaries found here: https://wkhtmltopdf.org/downloads.html
