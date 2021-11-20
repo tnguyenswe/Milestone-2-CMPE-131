@@ -9,6 +9,8 @@ pip3 install flask_sqlalchemy
 pip3 install flask_wtf
 ```
 
+You also need to install the wkhtmltopdf binaries found here: https://wkhtmltopdf.org/downloads.html
+
 ## To run the app
 ```
 git clone git@github.com:tnguyenswe/Milestone-2-CMPE-131.git

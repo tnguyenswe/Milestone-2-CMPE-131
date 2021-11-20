@@ -4,8 +4,10 @@ from studyapp.forms import LoginForm, SignupForm, UploadForm
 from studyapp.models import User,Post
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
-import markdown.extensions.fenced_code
 from werkzeug.utils import secure_filename
+import pdfkit
+from markdown import markdown
+import os
 
 @studyapp_obj.route("/loggedin")
 @login_required
@@ -48,6 +50,7 @@ def home():
 #convert markdown to flash card
 @studyapp_obj.route("/md_to_flashcard", methods=['GET', 'POST'])
 def markdown_to_flashcard():
+    import markdown.extensions.fenced_code
     form = UploadForm()
     if form.validate_on_submit():
         # get file name from form
@@ -63,12 +66,31 @@ def markdown_to_flashcard():
         return render_template('md_to_flashcard.html', form=form, success=True, md_file = md_template_string)
     return render_template('md_to_flashcard.html', form=form)
 
-
+# convert flashcard (html) to pdf
 # @studyapp_obj.route('/flashcard_to_pdf')
 # def flashcard_to_pdf():
     
-# @studyapp_obj.route('/md_to_pdf')
-# def md_to_pdf():
+# convert markdown to pdf
+@studyapp_obj.route('/md_to_pdf', methods=['GET', 'POST'])
+def md_to_pdf():
+    form = UploadForm()
+    if form.validate_on_submit():
+        # get file name from form
+        filename = secure_filename(form.file.data.filename)
+        # save the md file in a flashcards directory
+        form.file.data.save("studyapp/flashcards/" + filename)
+        # save the md file name and change to pdf file name
+        input_filename = 'studyapp/flashcards/' + filename
+        output_filename = input_filename.split(".md")
+        output_filename = output_filename[0] + '.pdf'
+        
+        #convert md file to pdf file
+        with open(input_filename, 'r') as f:
+            html_text = markdown(f.read(), output_format='html4')
+        pdfkit.from_string(html_text, output_filename)
+        return render_template('md_to_pdf.html', form=form, pdf=output_filename)
+    
+    return render_template('md_to_pdf.html', form=form)
 
 #render markdown
 @studyapp_obj.route('/render_md', methods=['GET', 'POST'])
