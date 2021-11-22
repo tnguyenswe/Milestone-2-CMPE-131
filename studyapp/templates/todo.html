@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>To-Do List</h1>
+	<div> <ul> {% for c in todolist: %}
+			<li> {{c}} </li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<form method = "POST" novalidate>
+		{{form.hidden_tag()}}
+		<p> {{form.todo.label}}<br>
+		<p> {{form.todo(size=64)}}</p>
+		<p> {{form.submit()}}</p>
+	</form>
+
+{% endblock %}
+
