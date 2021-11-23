@@ -122,3 +122,7 @@ def render_md():
         )
         return md_template_string
     return render_template('render_md.html', form=form)
+
+@studyapp_obj.route("/pomorodo")
+def pomorodotimer():
+    return render_template("pomorodo.html")
