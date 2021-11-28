@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+  <body>
+    <div>
+      <div>
+      <h1>Pomodoro</h1>
+
+      <div>
+        <div>
+          <span class="l1-txt2 p-b-9 minutes">25</span>
+          <span class="s1-txt1 where1 p-l-35">Minute</span>
+        </div>
+
+        <div>
+          <span class="l1-txt2 p-b-9 seconds">00</span>
+          <span class="s1-txt1 where1 p-l-35">Second</span>
+        </div>
+      </div>
+      <div class="flex-col-c wsize1 m-t-10 m-b-10 start-stop-area">
+        <a href="#" class="size2 m1-txt1 flex-c-m how-btn1 trans-04 start-stop"
+          onclick="timerFlag == 0? startTimer(): stopTimer();">
+          Start
+        </a>
+      </div>
+      <div class="flex-col-c wsize1 m-t-10 m-b-10 pause-area">
+        <a href="#" class="size2 m1-txt1 flex-c-m how-btn1 trans-04 pause"
+          onclick="pauseFlag == 1?resumeTimer(): pauseTimer();">
+          Pause
+        </a>
+      </div>
+    </div>
+    
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+ 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  
+  <script>
+    $(".pause-area").hide();
+    var minute = 25;
+    var second = 0;
+    var timerFlag = 0;
+    var pauseFlag = 0
+  </script>
+  
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  
+  </body>
+</div>
+{% endblock %}

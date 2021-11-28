@@ -20,3 +20,9 @@ class UploadForm(FlaskForm):
 class ToDoForm(FlaskForm):
     todo=StringField('Start building your to-do list!',validators=[DataRequired()])
     submit=SubmitField()
+
+class FlashCardForm(FlaskForm):
+    front = StringField('Front', validators=[DataRequired()])
+    back = StringField('back', validators=[DataRequired()])
+    submit = SubmitField('create')
+
