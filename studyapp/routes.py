@@ -1,7 +1,7 @@
 from studyapp import studyapp_obj
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, ToDoForm
-from studyapp.models import User,Post,ToDo
+from studyapp.forms import LoginForm, SignupForm, UploadForm, ToDoForm,FlashCardForm
+from studyapp.models import User,Post,ToDo,CreateFlashcard
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
@@ -123,11 +123,9 @@ def render_md():
         return md_template_string
     return render_template('render_md.html', form=form)
 
-<<<<<<< HEAD
 @studyapp_obj.route("/pomorodo")
 def pomorodotimer():
     return render_template("pomorodo.html")
-=======
 @studyapp_obj.route("/todo",methods=['GET','POST'])
 def todo_list():
     form=ToDoForm()
@@ -138,4 +136,18 @@ def todo_list():
         db.session.commit()
         return redirect ('/todo')
     return render_template('todo.html',form=form,todolist=todolist)
->>>>>>> main
+
+@studyapp_obj.route("/flashcard", methods=['GET', 'POST'])
+def create_flashcards():
+    form = FlashCardForm()
+    user_flashcards = CreateFlashcard.query.filter_by(user=current_user).all()
+    if form.validate_on_submit():
+        flashcard = CreateFlashcard(front=form.front.data, back=form.back.data, user=current_user)
+        db.session.add(CreateFlashcard)
+        db.session.commit()
+        flash('Flash Card Created Successfully', 'success')
+        return redirect(url_for('create_flashcards'))
+    return render_template('createflashcard.html', form=form, user_flashcards=user_flashcards)
+
+
+

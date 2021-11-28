@@ -1,0 +1,62 @@
+{% extends "base.html" %} 
+{% block content %}
+    <div class="row">
+        <div class="d-flex justify-content-center col-md-12">
+            <div class="card mt-4 border-info w-50 text-center">
+                <div class="card-header bg-custom">Flashcards</div>
+                <div class="card-body">
+                    <button type="button" id='btn' class="btn btn-warning mb-2">Create Flashcard</button>
+                    <div id="createflashcard">
+                        <form action="{{ url_for('input_flashcards') }}" method="POST">
+                            {{ form.hidden_tag() }}
+                            <div class="form-group mb-3">
+                                {{ form.front.label(class="form-control-label") }}
+                                {{ form.front(class="form-control") }}
+                            </div>
+                            <div class="form-group mb-3">
+                                {{ form.back.label(class="form-control-label") }}
+                                {{ form.back(class="form-control") }}
+                            </div>
+                            {{ form.submit(class="btn btn-outline-primary") }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 p-4">
+            {% if user_flashcards %}
+            <div class="row p-2">
+                {% for flashcard in user_flashcards %}
+                <div class="col-md-4">
+                    <div class="card shadow-sm rounded-end mb-3 p-2">
+                        <div class="card-body">
+                          <h4 class="card-title text-primary">Flashcard {{ loop.index }}</h4>
+                          <p class="card-text">{{ flashcard.front }}</p>
+                          <p class="card-text">{{ flashcard.back }}</p>
+                          <div>
+                            <a role="button" href="{{ url_for('delete_flashcard', id=flashcard.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center p-2">
+                <p class="text-lead">You haven't created any flashcards yet.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_scripts %} 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#createflashcard").hide();
+            $("#btn").click(function () {
+                $("#createflashcard").slideToggle();
+            });
+        });
+    </script>
+{% endblock custom_scripts %}
