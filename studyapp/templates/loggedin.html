@@ -1,9 +1,39 @@
 <!DOCTYPE>
 <html>
-	<p> <a href="/">Logout</a></p>
-	<div>
-	<p>
-	<h1>You are logged in!</h1>
-	</p>
-	</div>
+	<head>
+		{% if title %}
+		<title> {{title}}!</title>
+		{% endif %}
+<style>
+	@import url ('https://fonts.googlepis.com/css2?family=Roboto&display=swap');
+</style>
+<link rel ='stylesheet' href='css/base.css'>
+	</head>
+	<body>
+		<div style='margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; width:100%; justify-items: center; border: black; border-style: solid;'>
+		<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" style= "font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href="/loggedin">Home</a>
+		<a onmouseover="this.style.color='gray'; onmouseover="this.style.color='black'; style= "font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href='/'>Logout</a>
+		</div>
+		<div style="display: grid; justify-items: center;">
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for m in messages %}
+				<li> {{m}} </li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+		{% block content %}
+		{% endblock %}
+		</div>
+
+	<div style="display: grid; justify-items: center; padding-top: 20px">
+	<a onmouseover="this.style.color='gray';"onmouseover="this.style.color='black';" href="http://localhost:5000/md_to_pdf" style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">Markdown to PDF</a>
+	<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" href= "http://localhost:5000/md_to_flashcard" style= "font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">Markdown to Flashcard</a>
+	<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" href="http://localhost:5000/render_md" style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">Render Markdown</a>
+	<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" href="http://localhost:5000/flashcard_to_pdf" style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">Flashcard to PDF</a>
+	<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" href="http://localhost:5000/todo" style="font-family:'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">To Do List</a>
+
+	</body>
 </html>
