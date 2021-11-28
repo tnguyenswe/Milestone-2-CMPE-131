@@ -1,7 +1,7 @@
 from studyapp import studyapp_obj
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, ToDoForm
-from studyapp.models import User,Post,ToDo
+from studyapp.forms import LoginForm, SignupForm, UploadForm
+from studyapp.models import User,Post
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
@@ -123,13 +123,6 @@ def render_md():
         return md_template_string
     return render_template('render_md.html', form=form)
 
-@studyapp_obj.route("/todo",methods=['GET','POST'])
-def todo_list():
-    form=ToDoForm()
-    todolist=ToDo.query.all()
-    if form.validate_on_submit():
-        item=ToDo(todo=form.todo.data)
-        db.session.add(item)
-        db.session.commit()
-        return redirect ('/todo')
-    return render_template('todo.html',form=form,todolist=todolist)
+@studyapp_obj.route("/pomorodo")
+def pomorodotimer():
+    return render_template("pomorodo.html")
