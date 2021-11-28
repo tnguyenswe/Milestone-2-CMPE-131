@@ -39,3 +39,10 @@ class Flashcard(db.Model):
     
     def __repr__(self):
         return f'{self.body}'
+
+class ToDo(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    todo=db.Column(db.String(64), index=True)
+    
+    def __repr__(self):
+        return "{}".format(self.todo)

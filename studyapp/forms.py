@@ -16,3 +16,7 @@ class SignupForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     file = FileField()
+
+class ToDoForm(FlaskForm):
+    todo=StringField('Start building your to-do list!',validators=[DataRequired()])
+    submit=SubmitField()

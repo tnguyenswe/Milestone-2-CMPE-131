@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% if title %}
+		<title> {{title}}!</title>
+		{% endif %}
+<style>
+@import url('https://fonts.googlepis.com/css2?family=Roboto&display=swap');
+</style>
+<link rel="stylesheet" href="css/base.css">
+		      </head>
+	<body>
+		<div style="margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; justify-items: center; border: black; border-style: solid;">
+			<a onmouseover="this.style.color='gray';" onmouseover="this.style.color='black';" style="font-family: 'Roboto',sans-serif; text-decoration: none; font-size: 20px; color: black;" href="/loggedin">Home</a>
+			<a onmouseover="this.style.color='gray';" onmouseout="this.style.color='black';" style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;" href= "/loggedout">Logout</a>
+		</div>
+		<div style="display: grid; justify-items: center;">
+	
+	{% block content %}
+	{% endblock %}
+		</div>
+	</body>
+
+</html>
