@@ -9,17 +9,19 @@ import pdfkit
 from markdown import markdown
 import os
 
+#requires user to be logged in
 @studyapp_obj.route("/loggedin")
 @login_required
 def log():
     return render_template('loggedin.html')
 
+#allows users to logout and redirects to homepage
 @studyapp_obj.route("/loggedout")
 def logout():
     logout_user()
     return redirect('/')
 
-
+#LoginForm allows user to login into account after account is created
 @studyapp_obj.route('/login',methods=['GET','POST'])
 def login():
     form = LoginForm()
@@ -29,19 +31,20 @@ def login():
         return redirect('/loggedin')
     return render_template('login.html',form=form)
 
-
+#Signup form allows user to create an account with a username and password
 @studyapp_obj.route('/signup',methods=['GET','POST'])
 def signup():
     form=SignupForm()
     all_users=User.query.all()
     if form.validate_on_submit():
+        #username and password is saved to the database for future use
         u=User(username=form.username.data,password=form.password.data)
         db.session.add(u)
         db.session.commit()
         return redirect ('/login')
     return render_template('signup.html',form=form)
 
-
+#routes to the homepage
 @studyapp_obj.route('/')
 def home():
     title = "Homepage"
@@ -123,11 +126,13 @@ def render_md():
         return md_template_string
     return render_template('render_md.html', form=form)
 
+#allows users to create a to do list by typing into the text box and submitting
 @studyapp_obj.route("/todo",methods=['GET','POST'])
 def todo_list():
     form=ToDoForm()
     todolist=ToDo.query.all()
     if form.validate_on_submit():
+        #adds to-do item to list
         item=ToDo(todo=form.todo.data)
         db.session.add(item)
         db.session.commit()
