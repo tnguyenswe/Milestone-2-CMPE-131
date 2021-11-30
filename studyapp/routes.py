@@ -1,7 +1,7 @@
 from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm
-from studyapp.models import User,Post,ToDo
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm,FlashCardForm
+from studyapp.models import User,Post,ToDo,CreateFlashcard
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
@@ -231,4 +231,16 @@ def searchText():
 
             return render_template('searchText.html', file=file, form=form)
     return render_template('searchText.html', form=form)
+
+@studyapp_obj.route("/flashcard", methods=['GET', 'POST'])
+def create_flashcards():
+    form = FlashCardForm()
+    user_flashcards = CreateFlashcard.query.filter_by(user=current_user).all()
+    if form.validate_on_submit():
+        flashcard = CreateFlashcard(front=form.front.data, back=form.back.data, user=current_user)
+        db.session.add(CreateFlashcard)
+        db.session.commit()
+        flash('Successfully', 'success')
+        return redirect(url_for('create_flashcards'))
+    return render_template('createflashcard.html', form=form, user_flashcards=user_flashcards)
 
