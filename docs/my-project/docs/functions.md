@@ -5,6 +5,28 @@ Documentation for:
     studyapp/
         routes.py
 
+* `log():`
+	User will be redirected to this webpage only if the user is logged into their account.
+
+* `login():`
+	User is redirected to homepage after logging out of account.
+
+* `login():`
+	User is able to log into their account after signing up using a username and password.
+	
+	Parameters:
+		Username and Password
+	Returns:
+		Account for user
+
+* `signup():`
+	User enters a username and password and is able to create and accountthat will be used to log in.
+	Parameters:
+	Username and password used to create account
+	Return:
+	An account username and password to use when logging in.
+
+
 * `markdown_to_flashcard():` 
 
     Converts markdown files to flash cards.
@@ -45,28 +67,3 @@ Documentation for:
 
             Returns:
                     file (html): Outputs the markdown file as HTML.
-
-* `timeTracker():`
-    
-    creates a timer for the user
-    
-* `allowed_files(filename)`
-    
-    Checks if the file uploaded is of supported format..
-
-            Parameters:
-                    filename: naem of the to check
-
-            Returns:
-                    boolean: True if the file is allowed, else false.
-    
-* `searchText()`
-
-    Emboldens a specified text on an input file.
-
-            Parameters:
-                    file (pdf,txt,md): A text file of allowed extension.
-
-            Returns:
-                    file (html): outputs the text of the file in html and emboldens the searched text.
-    
