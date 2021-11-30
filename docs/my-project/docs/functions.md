@@ -5,6 +5,28 @@ Documentation for:
     studyapp/
         routes.py
 
+* `log():`
+	User will be redirected to this webpage only if the user is logged into their account.
+
+* `login():`
+	User is redirected to homepage after logging out of account.
+
+* `login():`
+	User is able to log into their account after signing up using a username and password.
+	
+	Parameters:
+		Username and Password
+	Returns:
+		Account for user
+
+* `signup():`
+	User enters a username and password and is able to create and accountthat will be used to log in.
+	Parameters:
+	Username and password used to create account
+	Return:
+	An account username and password to use when logging in.
+
+
 * `markdown_to_flashcard():` 
 
     Converts markdown files to flash cards.

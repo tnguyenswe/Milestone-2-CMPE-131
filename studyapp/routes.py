@@ -13,17 +13,31 @@ import os
 @studyapp_obj.route("/loggedin")
 @login_required
 def log():
+    '''
+        User will be redirected to this webpage only if the user is logged into their account.
+    '''
     return render_template('loggedin.html')
 
 #allows users to logout and redirects to homepage
 @studyapp_obj.route("/loggedout")
 def logout():
+    '''
+        User is redirecte to homepage after logging out of account.
+    '''
     logout_user()
     return redirect('/')
 
 #LoginForm allows user to login into account after account is created
 @studyapp_obj.route('/login',methods=['GET','POST'])
 def login():
+    '''
+        User is able to to log into their account after signing up.
+
+        Parameters:
+            username and password
+        Returns:
+            user creates an account and is able to log into account
+    '''
     form = LoginForm()
     if form.validate_on_submit():
         user=User.query.filter_by(username=form.username.data).first()
@@ -34,6 +48,14 @@ def login():
 #Signup form allows user to create an account with a username and password
 @studyapp_obj.route('/signup',methods=['GET','POST'])
 def signup():
+    '''
+        User enters a username and password and is able to create an account that will be used to log in.
+
+        Parameters:
+            Username and password used to create account
+        Returns:
+            An account username and password to use when logging in
+    '''
     form=SignupForm()
     all_users=User.query.all()
     if form.validate_on_submit():
