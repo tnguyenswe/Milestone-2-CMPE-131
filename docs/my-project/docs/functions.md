@@ -103,6 +103,6 @@ Documentation for:
 * `pomodoro_timer():`
         25 minutes timer to remind usder to take a break.
                 Parameters:
-                        filename: name of the file to check
+                        25 minutes timer
                 Returns: 
-                        boolean: True if the file is allowed, else false.
+                        file (html) pomodoro
