@@ -25,3 +25,9 @@ class SearchTextForm(FlaskForm):
     input_file = FileField('Upload', validators=[FileRequired()])
     text = StringField('Search Text', validators=[DataRequired()])
     search = SubmitField('Search')
+
+class FlashCardForm(FlaskForm):
+    front = StringField('Front', validators=[DataRequired()])
+    back = StringField('back', validators=[DataRequired()])
+    submit = SubmitField('create')
+
