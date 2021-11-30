@@ -50,9 +50,17 @@ def home():
     title = "Homepage"
     return render_template('home.html',title=title)
 
-#convert markdown to flash card
 @studyapp_obj.route("/md_to_flashcard", methods=['GET', 'POST'])
 def markdown_to_flashcard():
+    '''
+    Converts markdown files to flash cards.
+
+            Parameters:
+                    file (md): A markdown file
+
+            Returns:
+                    file (html): The HTML version of the markdown file.
+    '''
     import markdown.extensions.fenced_code
     form = UploadForm()
     if form.validate_on_submit():
@@ -60,7 +68,6 @@ def markdown_to_flashcard():
         filename = secure_filename(form.file.data.filename)
         # save the md file in a flashcards directory
         form.file.data.save("studyapp/flashcards/" + filename)
-        # open the md file
         open_file = open("studyapp/flashcards/" + filename, "r")
         # convert md to html so render template can render it
         md_template_string = markdown.markdown(
@@ -69,9 +76,18 @@ def markdown_to_flashcard():
         return render_template('md_to_flashcard.html', form=form, success=True, md_file = md_template_string)
     return render_template('md_to_flashcard.html', form=form)
 
-# convert flashcard (html) to pdf
 @studyapp_obj.route('/flashcard_to_pdf', methods=['GET', 'POST'])
 def flashcard_to_pdf():
+    '''
+    Converts markdown files to flash cards.
+
+            Parameters:
+                    file (html): A flashcard (html file)
+
+            Returns:
+                    file (pdf): The PDF version of the flashcard (html file).
+    '''
+    
     import pdfkit
     form = UploadForm()
     if form.validate_on_submit():
@@ -88,11 +104,19 @@ def flashcard_to_pdf():
 # convert markdown to pdf
 @studyapp_obj.route('/md_to_pdf', methods=['GET', 'POST'])
 def md_to_pdf():
+    '''
+    Converts markdown files to PDF's.
+
+            Parameters:
+                    file (md): A markdown file
+
+            Returns:
+                    file (PDF): The PDF version of the markdown file.
+    '''
     form = UploadForm()
     if form.validate_on_submit():
         # get file name from form
         filename = secure_filename(form.file.data.filename)
-        # save the md file in a flashcards directory
         form.file.data.save("studyapp/flashcards/" + filename)
         # save the md file name and change to pdf file name
         input_filename = 'studyapp/flashcards/' + filename
@@ -110,14 +134,22 @@ def md_to_pdf():
 #render markdown
 @studyapp_obj.route('/render_md', methods=['GET', 'POST'])
 def render_md():
+    '''
+    Converts markdown files to flash cards.
+
+            Parameters:
+                    file (md): A markdown file
+
+            Returns:
+                    file (html): Outputs the markdown file as HTML.
+    '''
+    
     import markdown.extensions.fenced_code
     form = UploadForm()
     if form.validate_on_submit():
         # get file name from form
         filename = secure_filename(form.file.data.filename)
-        # save the md file in a render_md directory
         form.file.data.save("studyapp/render_md/" + filename)
-        # open the md file
         open_file = open("studyapp/render_md/" + filename, "r")
         # convert md to html
         md_template_string = markdown.markdown(
