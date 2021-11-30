@@ -1,7 +1,7 @@
 from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm
-from studyapp.models import User,Post
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm
+from studyapp.models import User,Post,ToDo
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
