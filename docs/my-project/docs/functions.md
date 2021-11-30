@@ -67,3 +67,28 @@ Documentation for:
 
             Returns:
                     file (html): Outputs the markdown file as HTML.
+
+
+* `timeTracker()`
+
+    creates a timer for the user
+
+* `allowed_files(filename)`
+
+    Checks if the file uploaded is of supported format..
+
+            Parameters:
+                    filename: naem of the to check
+
+            Returns:
+                    boolean: True if the file is allowed, else false.
+
+* `searchTextForm()`
+
+    Emboldens a specified text on an input file.
+
+            Parameters:
+                    file (pdf,txt,md): A text file of allowed extension.
+
+            Returns:
+                    file (html): outputs the text of the file in html and emboldens the searched text.
