@@ -92,3 +92,17 @@ Documentation for:
 
             Returns:
                     file (html): outputs the text of the file in html and emboldens the searched text.
+
+* `createflashcard():`
+        add new flashcard for user
+                Parameters:
+                        file (md):mark down file 
+                Returns: 
+                       file (html): MD file is converted to HTML & added to db
+
+* `pomodoro_timer():`
+        25 minutes timer to remind usder to take a break.
+                Parameters:
+                        filename: name of the file to check
+                Returns: 
+                        boolean: True if the file is allowed, else false.
