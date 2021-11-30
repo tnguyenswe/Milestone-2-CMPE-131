@@ -196,6 +196,13 @@ def todo_list():
 
 @studyapp_obj.route("/pomorodo")
 def pomorodotimer():
+    '''
+    Creates a pomodoro timer for the user
+        Parameters:
+            none
+        Returns:
+            text (html): Reminds the user every 25 minutes to take a break
+    '''
     return render_template("pomorodo.html")
 
 
@@ -215,7 +222,7 @@ def allowed_file(filename):
     Checks if the file uploaded is of supported format..
 
             Parameters:
-                    filename: naem of the to check
+                    filename: name of the to check
 
             Returns:
                     boolean: True if the file is allowed, else false.
@@ -260,6 +267,15 @@ def searchText():
 
 @studyapp_obj.route("/flashcard", methods=['GET', 'POST'])
 def create_flashcards():
+    '''
+    Creates a flashcard and adds it to our DB
+
+            Parameters:
+                    file (md): MD File to be converted to flash card and added to our DB
+
+            Returns:
+                    text (html): Outputs a success message if the flashcard was added successfully.
+    '''
     form = FlashCardForm()
     user_flashcards = CreateFlashcard.query.filter_by(user=current_user).all()
     if form.validate_on_submit():

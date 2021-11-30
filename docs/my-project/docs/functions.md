@@ -92,3 +92,22 @@ Documentation for:
 
             Returns:
                     file (html): outputs the text of the file in html and emboldens the searched text.
+
+* `createflashcard():`
+
+    Creates a flashcard and adds it to our DB
+
+            Parameters:
+                    file (md): MD File to be converted to flash card and added to our DB
+
+            Returns:
+                    text (html): Outputs a success message if the flashcard was added successfully.
+
+* `pomodoro_timer():`
+
+    Checks if the file uploaded is of supported format..
+            Parameters:
+                    filename: name of the to check
+
+            Returns:
+                    boolean: True if the file is allowed, else false.
