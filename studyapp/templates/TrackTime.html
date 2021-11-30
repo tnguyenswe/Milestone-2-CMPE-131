@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<h1 style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;">Track Your Hours!!!</h1>
+
+<p id="stopwatch">00:00:00</p>
+<button onclick="startTimer()">Start Timer</button>
+<button onclick="stopTimer()">Stop Timer</button>
+<button onclick="reset()">Reset</button>
+
+
+<script src="{{url_for('static', filename = 'js/timerCycle.js')}}"> </script>
+
+{% endblock %}
