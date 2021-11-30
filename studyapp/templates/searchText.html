@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<h1 style="font-family: 'Roboto', sans-serif; text-decoration: none; font-size: 20px; color: black;"> Search Text in File: </h1>
+<form method="POST" enctype=multipart/form-data>
+    {{ form.hidden_tag() }}
+
+    <p> {{ form.input_file() }} </p>
+
+    <p> {{ form.text.label }} <br>
+        {{ form.text(size=28) }}</p>
+
+    <p> {{ form.search() }}</p>
+
+</form>
+
+{% if file %}
+    <p>{{file|safe}}</p>
+{% endif %}
+
+{% endblock %}

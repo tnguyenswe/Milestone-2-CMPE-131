@@ -1,7 +1,7 @@
-from studyapp import studyapp_obj
+from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, ToDoForm
-from studyapp.models import User,Post,ToDo
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm
+from studyapp.models import User,Post
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
@@ -126,6 +126,7 @@ def render_md():
         return md_template_string
     return render_template('render_md.html', form=form)
 
+
 #allows users to create a to do list by typing into the text box and submitting
 @studyapp_obj.route("/todo",methods=['GET','POST'])
 def todo_list():
@@ -138,3 +139,42 @@ def todo_list():
         db.session.commit()
         return redirect ('/todo')
     return render_template('todo.html',form=form,todolist=todolist)
+
+@studyapp_obj.route("/pomorodo")
+def pomorodotimer():
+    return render_template("pomorodo.html")
+
+
+
+@studyapp_obj.route("/trackHours", methods=['GET'])
+def timeTracker():
+    return render_template('TrackTime.html')
+
+# code from this wesite was referenced to write the following two methods
+# https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@studyapp_obj.route("/searchText", methods=['GET', 'POST'])
+def searchText():
+    form = SearchTextForm()
+    if form.validate_on_submit():
+        if form.input_file.data.filename == '':
+            flash('No selected file')
+            return redirect('/searchText')
+        if form.input_file.data and allowed_file(form.input_file.data.filename):
+            filename = secure_filename(form.input_file.data.filename)
+            form.input_file.data.save(os.path.join(studyapp_obj.config['UPLOAD_FOLDER'], filename))
+            file = open("studyapp/static/uploads/" + filename, encoding="utf8")
+            file =file.read()
+            search_word = form.text.data
+            if search_word in file:
+                file = file.replace(search_word, '<strong>'+search_word+'</strong>')
+            else:
+                flash('Searched worrd is not present in file.')
+
+            return render_template('searchText.html', file=file, form=form)
+    return render_template('searchText.html', form=form)
+
