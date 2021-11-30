@@ -46,3 +46,11 @@ class ToDo(db.Model):
     
     def __repr__(self):
         return "{}".format(self.todo)
+
+class CreateFlashcard(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    front= db.Column(db.Text)
+    back = db.Column(db.Text)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
