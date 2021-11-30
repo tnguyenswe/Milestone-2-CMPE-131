@@ -180,29 +180,55 @@ def pomorodotimer():
 
 @studyapp_obj.route("/trackHours", methods=['GET'])
 def timeTracker():
+    '''
+    creates a timer for the user
+    '''
     return render_template('TrackTime.html')
 
 # code from this wesite was referenced to write the following two methods
 # https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/
 
 def allowed_file(filename):
+    '''
+    Checks if the file uploaded is of supported format..
+
+            Parameters:
+                    filename: naem of the to check
+
+            Returns:
+                    boolean: True if the file is allowed, else false.
+    '''
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @studyapp_obj.route("/searchText", methods=['GET', 'POST'])
 def searchText():
+    '''
+    Emboldens a specified text on an input file.
+
+            Parameters:
+                    file (pdf,txt,md): A text file of allowed extension.
+
+            Returns:
+                    file (html): outputs the text of the file in html and emboldens the searched text.
+    '''
     form = SearchTextForm()
     if form.validate_on_submit():
         if form.input_file.data.filename == '':
             flash('No selected file')
             return redirect('/searchText')
         if form.input_file.data and allowed_file(form.input_file.data.filename):
+            #To get filename from form
             filename = secure_filename(form.input_file.data.filename)
+            #To save file with new path
             form.input_file.data.save(os.path.join(studyapp_obj.config['UPLOAD_FOLDER'], filename))
+            #opening the file to get text in file
             file = open("studyapp/static/uploads/" + filename, encoding="utf8")
             file =file.read()
+            #To get the text to be searched from forms
             search_word = form.text.data
             if search_word in file:
+                #sorrounding the searched word with html <strong> tags to bold the text.
                 file = file.replace(search_word, '<strong>'+search_word+'</strong>')
             else:
                 flash('Searched worrd is not present in file.')
