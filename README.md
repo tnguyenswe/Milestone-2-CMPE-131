@@ -31,3 +31,5 @@ The app is located at http://localhost:5000/
 ## Additional Documentation
 
 For in depth documentation, navigate to docs/my-projects/ then use the command `mkdocs serve`
+
+The documentation app is viewable at http://localhost:8000/
