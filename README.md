@@ -1,6 +1,8 @@
 # Milestone-2-CMPE-131
 
-Temporary README- we need to add a MKDOCS file website.
+Basic web app built using Flask and Bootstrap.
+
+Bootstrap Theme used- Flatly from https://bootswatch.com/
 
 ## Dependencies
 ```
