@@ -27,3 +27,7 @@ python3 run.py
 ## To view the app
 
 The app is located at http://localhost:5000/
+
+## Additional Documentation
+
+For in depth documentation, navigate to docs/my-projects/ then use the command `mkdocs serve`
