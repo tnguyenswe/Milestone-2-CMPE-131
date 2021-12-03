@@ -16,16 +16,16 @@ def log():
     '''
         User will be redirected to this webpage only if the user is logged into their account.
     '''
-    return render_template('loggedin.html')
+    return render_template('home.html')
 
 #allows users to logout and redirects to homepage
-@studyapp_obj.route("/loggedout")
+@studyapp_obj.route("/")
 def logout():
     '''
         User is redirecte to homepage after logging out of account.
     '''
     logout_user()
-    return redirect('/')
+    return render_template('splash.html')
 
 #LoginForm allows user to login into account after account is created
 @studyapp_obj.route('/login',methods=['GET','POST'])
@@ -42,7 +42,7 @@ def login():
     if form.validate_on_submit():
         user=User.query.filter_by(username=form.username.data).first()
         login_user(user)
-        return redirect('/loggedin')
+        return redirect('/home')
     return render_template('login.html',form=form)
 
 #Signup form allows user to create an account with a username and password
@@ -67,7 +67,7 @@ def signup():
     return render_template('signup.html',form=form)
 
 #routes to the homepage
-@studyapp_obj.route('/')
+@studyapp_obj.route('/home')
 def home():
     title = "Homepage"
     return render_template('home.html',title=title)
