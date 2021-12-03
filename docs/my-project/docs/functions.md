@@ -5,10 +5,13 @@ Documentation for:
     studyapp/
         routes.py
 
+* `splash():`
+	User is shown the splash page for the web app.
+
 * `log():`
 	User will be redirected to this webpage only if the user is logged into their account.
 
-* `login():`
+* `logout():`
 	User is redirected to homepage after logging out of account.
 
 * `login():`

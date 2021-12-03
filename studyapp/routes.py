@@ -18,11 +18,20 @@ def log():
     '''
     return render_template('home.html')
 
-#allows users to logout and redirects to homepage
-@studyapp_obj.route("/")
+#allows users to logout and redirects to splash page
+@studyapp_obj.route("/logout")
 def logout():
     '''
-        User is redirecte to homepage after logging out of account.
+        User is redirected to splash page after logging out of account.
+    '''
+    logout_user()
+    return render_template('splash.html')
+
+#allows users to logout and redirects to homepage
+@studyapp_obj.route("/")
+def splash():
+    '''
+        Splash page for web app
     '''
     logout_user()
     return render_template('splash.html')
