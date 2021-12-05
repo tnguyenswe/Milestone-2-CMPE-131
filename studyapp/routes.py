@@ -194,7 +194,7 @@ def todo_list():
         return redirect ('/todo')
     return render_template('todo.html',form=form,todolist=todolist)
 
-@studyapp_obj.route("/pomorodo")
+@studyapp_obj.route("/pomodoro")
 def pomorodotimer():
     return render_template("pomorodo.html")
 
