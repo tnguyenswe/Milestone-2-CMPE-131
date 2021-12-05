@@ -120,3 +120,10 @@ Documentation for:
 
             Returns:
                     boolean: True if the file is allowed, else false.
+* `change_file():`
+	User is able to change name of a file by entering current file name and new name of file.
+
+	Parameters:
+		exisiting file name and new file name
+	Returns:
+		file with updated name 
