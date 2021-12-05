@@ -1,6 +1,6 @@
 from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm, ChangeNameForm
 from studyapp.models import User,Post,ToDo
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import pdfkit
 from markdown import markdown
 import os
-
+import glob
 #requires user to be logged in
 @studyapp_obj.route("/loggedin")
 @login_required
@@ -232,3 +232,16 @@ def searchText():
             return render_template('searchText.html', file=file, form=form)
     return render_template('searchText.html', form=form)
 
+@studyapp_obj.route("/changefile", methods=['GET','POST'])
+def change_file():
+    """ User is able to change the name of a file. The file that is displayed can be changed to another name by typing in the existing filename followed by the new name.
+    """
+    form=ChangeNameForm()
+    filename=(os.listdir())
+    filename=glob.glob('*.txt')
+    if form.validate_on_submit():
+        file_name=(form.file_name.data)
+        rename_file=(form.rename_file.data)
+        os.rename(file_name,rename_file)
+        return redirect("/changefile")
+    return render_template("changefile.html",form=form,filename=filename)
