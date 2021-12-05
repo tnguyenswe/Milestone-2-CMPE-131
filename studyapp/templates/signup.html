@@ -1,6 +1,7 @@
-{% extends "base.html" %}
-{% block content %}
-	<h1> Sign up for an account </h1>
+<head>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
+</head>
+<h1> Sign up for an account </h1>
 	<form method = "POST" novalidate>
 		{{form.hidden_tag()}}
 		<p>
@@ -18,4 +19,3 @@
 	<a href = "/login">Already have an account? Login here.</a>
 	</p>
 </div>
-{% endblock %}

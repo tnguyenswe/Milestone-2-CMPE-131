@@ -1,6 +1,8 @@
 # Milestone-2-CMPE-131
 
-Temporary README- we need to add a MKDOCS file website.
+Basic web app built using Flask and Bootstrap.
+
+Bootstrap Theme used- Flatly from https://bootswatch.com/
 
 ## Dependencies
 ```
@@ -25,3 +27,9 @@ python3 run.py
 ## To view the app
 
 The app is located at http://localhost:5000/
+
+## Additional Documentation
+
+For in depth documentation, navigate to docs/my-projects/ then use the command `mkdocs serve`
+
+The documentation app is viewable at http://localhost:8000/

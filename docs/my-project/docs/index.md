@@ -20,14 +20,6 @@ Navigate to [localhost:5000](http://localhost:5000/)
 * `pip3 install markdown`
 * `pip3 install mkdocs`
 
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
 ## Project layout
     docs/ # This holds all our documentation for this project
         my-project/

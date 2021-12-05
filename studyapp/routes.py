@@ -16,16 +16,25 @@ def log():
     '''
         User will be redirected to this webpage only if the user is logged into their account.
     '''
-    return render_template('loggedin.html')
+    return render_template('home.html')
 
-#allows users to logout and redirects to homepage
-@studyapp_obj.route("/loggedout")
+#allows users to logout and redirects to splash page
+@studyapp_obj.route("/logout")
 def logout():
     '''
-        User is redirecte to homepage after logging out of account.
+        User is redirected to splash page after logging out of account.
     '''
     logout_user()
-    return redirect('/')
+    return render_template('splash.html')
+
+#allows users to logout and redirects to homepage
+@studyapp_obj.route("/")
+def splash():
+    '''
+        Splash page for web app
+    '''
+    logout_user()
+    return render_template('splash.html')
 
 #LoginForm allows user to login into account after account is created
 @studyapp_obj.route('/login',methods=['GET','POST'])
@@ -42,7 +51,7 @@ def login():
     if form.validate_on_submit():
         user=User.query.filter_by(username=form.username.data).first()
         login_user(user)
-        return redirect('/loggedin')
+        return redirect('/home')
     return render_template('login.html',form=form)
 
 #Signup form allows user to create an account with a username and password
@@ -67,7 +76,7 @@ def signup():
     return render_template('signup.html',form=form)
 
 #routes to the homepage
-@studyapp_obj.route('/')
+@studyapp_obj.route('/home')
 def home():
     title = "Homepage"
     return render_template('home.html',title=title)
@@ -196,6 +205,13 @@ def todo_list():
 
 @studyapp_obj.route("/pomodoro")
 def pomorodotimer():
+    '''
+    Creates a pomodoro timer for the user
+        Parameters:
+            none
+        Returns:
+            text (html): Reminds the user every 25 minutes to take a break
+    '''
     return render_template("pomorodo.html")
 
 
@@ -215,7 +231,7 @@ def allowed_file(filename):
     Checks if the file uploaded is of supported format..
 
             Parameters:
-                    filename: naem of the to check
+                    filename: name of the to check
 
             Returns:
                     boolean: True if the file is allowed, else false.
@@ -260,6 +276,15 @@ def searchText():
 
 @studyapp_obj.route("/flashcard", methods=['GET', 'POST'])
 def create_flashcards():
+    '''
+    Creates a flashcard and adds it to our DB
+
+            Parameters:
+                    file (md): MD File to be converted to flash card and added to our DB
+
+            Returns:
+                    text (html): Outputs a success message if the flashcard was added successfully.
+    '''
     form = FlashCardForm()
     user_flashcards = CreateFlashcard.query.filter_by(user=current_user).all()
     if form.validate_on_submit():

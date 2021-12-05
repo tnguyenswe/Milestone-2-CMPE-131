@@ -5,26 +5,35 @@ Documentation for:
     studyapp/
         routes.py
 
+* `splash():`
+
+	User is shown the splash page for the web app.
+
 * `log():`
+
 	User will be redirected to this webpage only if the user is logged into their account.
 
-* `login():`
+* `logout():`
+
 	User is redirected to homepage after logging out of account.
 
 * `login():`
+
 	User is able to log into their account after signing up using a username and password.
 	
-	Parameters:
-		Username and Password
-	Returns:
-		Account for user
+                Parameters:
+                        Username and Password
+                Returns:
+                        Account for user
 
 * `signup():`
+
 	User enters a username and password and is able to create and accountthat will be used to log in.
-	Parameters:
-	Username and password used to create account
-	Return:
-	An account username and password to use when logging in.
+                
+                Parameters:
+                        Username and password used to create account
+                Return:
+                        An account username and password to use when logging in.
 
 
 * `markdown_to_flashcard():` 
@@ -94,6 +103,7 @@ Documentation for:
                     file (html): outputs the text of the file in html and emboldens the searched text.
 
 * `createflashcard():`
+<<<<<<< HEAD
         add new flashcard for user
                 Parameters:
                         file (md):mark down file 
@@ -106,3 +116,22 @@ Documentation for:
                         25 minutes timer
                 Returns: 
                         file (html) pomodoro
+=======
+
+    Creates a flashcard and adds it to our DB
+
+            Parameters:
+                    file (md): MD File to be converted to flash card and added to our DB
+
+            Returns:
+                    text (html): Outputs a success message if the flashcard was added successfully.
+
+* `pomodoro_timer():`
+
+    Checks if the file uploaded is of supported format..
+            Parameters:
+                    filename: name of the to check
+
+            Returns:
+                    boolean: True if the file is allowed, else false.
+>>>>>>> main
