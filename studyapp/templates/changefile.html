@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1> Change File Name: </h1>
+
+	<div> <p> Name of File: {{ filename }} </p>
+	</div>
+
+	<form method = "POST" novalidate>
+		{{form.hidden_tag()}}
+		<p> {{form.file_name.label}}<br>
+		<p> {{form.file_name(size=64)}}</p>
+		<p> {{form.rename_file.label}} <br>
+		<p> {{form.rename_file(size=64)}}</p>
+		<p> {{ form.submit()}}</p>
+	</form>
+{% endblock %}
