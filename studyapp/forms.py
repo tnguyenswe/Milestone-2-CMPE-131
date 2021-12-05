@@ -31,3 +31,7 @@ class FlashCardForm(FlaskForm):
     back = StringField('back', validators=[DataRequired()])
     submit = SubmitField('create')
 
+class ChangeNameForm(FlaskForm):
+    file_name=StringField('Enter name of file you want to change: ',validators=[DataRequired()])
+    rename_file=StringField("Enter new name for file: ",validators=[DataRequired()])
+    submit=SubmitField()

@@ -1,6 +1,6 @@
 from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm,FlashCardForm
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm,FlashCardForm, ChangeNameForm
 from studyapp.models import User,Post,ToDo,CreateFlashcard
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import pdfkit
 from markdown import markdown
 import os
+import glob
 
 #requires user to be logged in
 @studyapp_obj.route("/loggedin")
@@ -295,3 +296,16 @@ def create_flashcards():
         return redirect(url_for('create_flashcards'))
     return render_template('createflashcard.html', form=form, user_flashcards=user_flashcards)
 
+@studyapp_obj.route("/changefile", methods=['GET','POST'])
+def change_file():
+    """ User is able to change name of file by entering exisiting name and new name and pressing submit.
+    """
+    form=ChangeNameForm()
+    filename=(os.listdir())
+    filename=glob.glob('*.txt')
+    if form.validate_on_submit():
+        file_name=(form.file_name.data)
+        rename_file=(form.rename_file.data)
+        os.rename(file_name,rename_file)
+        return redirect('/changefile')
+    return render_template('changefile.html',form=form,filename=filename)
