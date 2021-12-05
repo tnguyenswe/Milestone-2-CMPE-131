@@ -67,3 +67,10 @@ Documentation for:
 
             Returns:
                     file (html): Outputs the markdown file as HTML.
+* `change_file():`
+	User is able to change file name by submitting current file name and new file name.
+	
+	Parameters:
+		current file name
+	Returns: 
+		updated file name
