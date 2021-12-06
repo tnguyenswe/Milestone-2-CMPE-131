@@ -1,7 +1,7 @@
 from studyapp import studyapp_obj, ALLOWED_EXTENSIONS
 from flask import render_template, flash, redirect,request
-from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm,FlashCardForm, ChangeNameForm
-from studyapp.models import User,Post,ToDo,CreateFlashcard
+from studyapp.forms import LoginForm, SignupForm, UploadForm, SearchTextForm,ToDoForm,FlashCardForm, ChangeNameForm, TimeScheduleForm
+from studyapp.models import User,Post,ToDo,CreateFlashcard, timeSchedule
 from flask_login import current_user,login_user,logout_user,login_required
 from studyapp import db
 from werkzeug.utils import secure_filename
@@ -309,3 +309,28 @@ def change_file():
         os.rename(file_name,rename_file)
         return redirect('/changefile')
     return render_template('changefile.html',form=form,filename=filename)
+
+@studyapp_obj.route("/timeSchedule", methods=['GET', 'POST'])
+def TimeSchedule():
+    '''
+    creates a schedule for user with a task and the scheduled time span
+
+            Parameters:
+                    stask name and start and end time for schedule.
+
+            Returns:
+                   (html): outputs schedule in a list format
+    '''
+    form = TimeScheduleForm()
+
+    if form.validate_on_submit():
+        task = timeSchedule(taskName=form.TaskName.data, startTime=form.StartTime.data, endTime=form.EndTime.data)
+        db.session.add(task)
+        db.session.commit()
+        return redirect("/timeSchedule")
+
+
+
+    Tasks = timeSchedule.query.order_by(timeSchedule.id).all()
+
+    return render_template('timeSchedule.html', Tasks = Tasks, form=form)

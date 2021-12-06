@@ -35,3 +35,10 @@ class ChangeNameForm(FlaskForm):
     file_name=StringField('Enter name of file you want to change: ',validators=[DataRequired()])
     rename_file=StringField("Enter new name for file: ",validators=[DataRequired()])
     submit=SubmitField()
+
+
+class TimeScheduleForm(FlaskForm):
+    TaskName = StringField('Task', validators=[DataRequired()])
+    StartTime = StringField('Start Time in HH:MM AM/PM format', validators=[DataRequired()])
+    EndTime = StringField('End Time in HH:MM AM/PM format', validators=[DataRequired()])
+    submit = SubmitField('Submit')
