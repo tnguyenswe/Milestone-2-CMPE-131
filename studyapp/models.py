@@ -54,3 +54,12 @@ class CreateFlashcard(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+
+class timeSchedule(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    taskName = db.Column(db.String(64), index=True)
+    startTime = db.Column(db.String(64), index=True)
+    endTime = db.Column(db.String(64), index=True)
+
+    def __repr__(self):
+        return f'<{self.taskName}: {self.startTime} - {self.endTime}>'

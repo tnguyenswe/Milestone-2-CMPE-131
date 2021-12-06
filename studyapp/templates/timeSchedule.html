@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+
+    <p> {{ form.TaskName.label }} <br>
+        {{ form.TaskName(size=32) }}</p>
+
+    <p> {{ form.StartTime.label }} <br>
+        {{ form.StartTime(size=20) }}</p>
+
+    <p> {{ form.EndTime.label }} <br>
+        {{ form.EndTime(size = 20) }}</p>
+
+    <p>{{ form.submit() }}</p>
+
+</form>
+
+{% if Tasks %}
+<ul>
+    {% for task in Tasks %}
+    <li>
+        <p>{{task.taskName}}:
+        start: {{task.startTime}} - End: {{task.endTime}}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% endblock %}
